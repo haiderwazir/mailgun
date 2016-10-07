@@ -1,2 +1,3 @@
 - ruby -r "./mailer.rb" -e "Mailer.check_suppressions('email')" to check if email is listed in a suppression
 - ruby -r "./mailer.rb" -e "Mailer.send_email('email')" to send email with subject campaign_id and text. Can be viewed at http://bin.mailgun.net/d82eaee5 as they are in sandbox/test mode
+- ruby -r "./mailer.rb" -e "Mailer.get_previous_emails('email')" to get a list of previous deliveries to the email address
