@@ -27,7 +27,7 @@ ENV['domain']= 'sandboxae24e2ff954d4b43ac75e97a23dbac75.mailgun.org'
 
 	def self.check_suppressions(email)
 		if check_email_format(email)
-			mg_client = Mailgun::Client.new(ENV['key'])
+			mg_client = self.simple_initialization
 			domain = ENV['domain']
 			response = []
 			begin
@@ -55,10 +55,23 @@ ENV['domain']= 'sandboxae24e2ff954d4b43ac75e97a23dbac75.mailgun.org'
 		end
 	end
 
+	def self.get_previous_emails(email)
+		domain= ENV['domain']
+		mg_client = self.simple_initialization
+  	puts mg_client.get "#{domain}/events", {:recipient => email, :pretty=> 'yes'}
+  end
+
 	private
 
 	def self.check_email_format(email)
 		email.match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	end
+
+	def self.simple_initialization
+		Mailgun::Client.new(ENV['key'])
+	end
+	
+
+
 
 end
